@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@include('partials.modalguest')
+@include('partials.modal-add-guest')
 
 <div class="container mt-5">
   @include('partials.alert')

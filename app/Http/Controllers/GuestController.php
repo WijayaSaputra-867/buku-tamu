@@ -35,7 +35,7 @@ class GuestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'required|string|max:50',
             'instansi' => 'required|string|max:255',
             'jk' => 'required|in:Laki-laki,Perempuan',
             'keperluan' => 'required|string|max:255',
@@ -45,7 +45,7 @@ class GuestController extends Controller
         [
             'nama.required' => 'Nama wajib diisi.',
             'nama.string' => 'Nama harus berupa teks.',
-            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'nama.max' => 'Nama tidak boleh lebih dari 50 karakter.',
             'instansi.required' => 'Asal instansi wajib diisi.',
             'instansi.string' => 'Asal instansi harus berupa teks.',
             'instansi.max' => 'Asal instansi tidak boleh lebih dari 255 karakter.',
@@ -98,7 +98,10 @@ class GuestController extends Controller
         $id_user = auth()->id();
         $guest->check_out = now();
         $guest->user_checkout = $id_user;
-        $guest->save();
-        return redirect()->back();
+        if ($guest->save()) {
+            return redirect()->back()->with('success', 'Check out berhasil');
+        }else {
+            return redirect()->back()->with('danger', 'Check ouut gagal');
+        }
     }
 }

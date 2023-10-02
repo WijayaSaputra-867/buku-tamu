@@ -30,6 +30,7 @@ Route::prefix('/guest')->group(function(){
 
 Route::prefix('/petugas')->group(function() {
     Route::get('/', [UserController::class, 'index']);
+    Route::post('/create', [UserController::class, 'store']);
 });
     
 Auth::routes();

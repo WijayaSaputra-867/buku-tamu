@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container mt-5">
+  @include('partials.alert')
   <div class="row mb-5">
     <div class="col">   
         <h3 class="text-center">{{ $guest->nama_tamu }}</h3>
