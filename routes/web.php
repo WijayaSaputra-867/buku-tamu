@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\GuestController;
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
-    return view('home', [
-        'link' => 'home',
-    ]);
-});
 
 Route::prefix('/guest')->group(function(){
     Route::get('/', [GuestController::class, 'index']);
+    Route::post('/create', [GuestController::class, 'store']);
     Route::get('/details/{guest}', [GuestController::class, 'show']);
     Route::get('/checkout/{guest}', [GuestController::class, 'update']);
 });
@@ -34,3 +32,6 @@ Route::prefix('/petugas')->group(function() {
     Route::get('/', [UserController::class, 'index']);
 });
     
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');

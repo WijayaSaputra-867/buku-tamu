@@ -1,9 +1,8 @@
-@extends('layouts.main')
-@section('title','Halaman | Detail Tamu')
-@section('container')
-<div class="row mb-5">
-    <div class="col">
-        
+@extends('layouts.app')
+@section('content')
+<div class="container mt-5">
+  <div class="row mb-5">
+    <div class="col">   
         <h3 class="text-center">{{ $guest->nama_tamu }}</h3>
         <hr class="border-primary border-3">
         <hr class="border-primary border-2">
@@ -14,8 +13,8 @@
     <div class="col">
         <img src="" alt="" class="img-thumbnail rounded mx-auto d-block">
     </div>
-</div>
-<div class="row">
+  </div>
+  <div class="row">
     <div class="col">
         <table class="table table-hover border-primary">
             <thead>
@@ -48,5 +47,7 @@
             </tbody>
         </table>
     </div>
+  </div>
 </div>
+
 @endsection
