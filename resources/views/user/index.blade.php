@@ -2,6 +2,7 @@
 @section('title','Halaman | Petugas')
 @section('content')
 @include('partials.modal-add-user')
+
 <div class="container mt-5">
   @include('partials.alert')
   <div class="">
@@ -31,8 +32,11 @@
           <td>{{ $user->name }}</td>
           <td>{{ $user->email }}</td>
           <td>
-              <a href="/user/details/{{ $user->id }}" class="btn btn-sm btn-outline-primary">Detail</a>
-              <a href="/user/update/{{ $user->id }}" class="btn btn-sm btn-outline-warning">Ubah</a>
+              <a href="/petugas/details/{{ $user->id }}" class="btn btn-sm btn-outline-primary">Detail</a>
+              <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#ubahPetugasModal">
+                Ubah
+              </button>
+              @include('partials.modal-edit-user')
           </td>
         </tr>
         @endforeach

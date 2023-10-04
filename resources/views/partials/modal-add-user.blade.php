@@ -35,6 +35,15 @@
                                 </div>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="inputPasswordKonfirmasi" class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control @error('konfirmasi') is-invalid @enderror" id="inputPasswordKonfirmasi" name="konfirmasi">
+                            @error('konfirmasi')     
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

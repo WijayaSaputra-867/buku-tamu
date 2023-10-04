@@ -31,6 +31,8 @@ Route::prefix('/guest')->group(function(){
 Route::prefix('/petugas')->group(function() {
     Route::get('/', [UserController::class, 'index']);
     Route::post('/create', [UserController::class, 'store']);
+    Route::get('/details/{user}', [UserController::class, 'show']);
+    Route::post('/update/{user}', [UserController::class, 'update']);
 });
     
 Auth::routes();

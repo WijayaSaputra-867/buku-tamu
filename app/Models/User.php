@@ -43,10 +43,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    // public function checkin(){
-    //     return $this->hasMany(Guest::class , 'user_chekin_id', 'id');
-    // }
+    
     public function checkIn(){
         return $this->hasMany(Guest::class, 'user_checkin', 'id');
     }

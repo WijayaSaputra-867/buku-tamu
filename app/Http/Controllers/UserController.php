@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Monolog\Handler\IFTTTHandler;
 
 class UserController extends Controller
 {
@@ -30,23 +32,16 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
          // Validasi data jika diperlukan
-        $request->validate([
+        $validate = $request->validate([
             'nama' => 'required|string|max:50',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|min:6|confirmed',
+            'konfirmasi'=> 'required|confirmed:'
         ],
         [
             'nama.required' => 'Nama wajib diisi.',
@@ -56,8 +51,10 @@ class UserController extends Controller
             'email.email' => 'Email harus berupa email yang valid.',
             'email.unique' => 'Email harus berbeda dengan email yang sudah di tambahkan.',
             'password.required' => 'Password wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak sama dengan password.',
             'password.min' => 'Password harus lebih besar dari 6 karakter.',
-
+            'konfirmasi.required' => 'Konfirmasi password harus diisi',
+            'konfirmasi.confirmed' => 'Konfirmasi password tidak sama dengan password.',
         ]);
 
         // Simpan data pengguna baru ke database
@@ -75,32 +72,76 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        $checkin = $this->check('checkin', $user);
+        $checkout = $this->check('checkout', $user);
+        return view('user.details',[
+            'link' => 'petugas',
+            'user' => $user,
+            'checkin' => $checkin,
+            'checkout' => $checkout,
+        ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        
+        if($request->input('email') != $user->email){
+
+            $validate = $request->validate([
+                'nama' => 'required|string|max:50',
+                'email' => 'required|email|unique:users',
+            ],
+            [
+                'nama.required' => 'Nama wajib diisi.',
+                'nama.string' => 'Nama harus berupa teks.',
+                'nama.max' => 'Nama tidak boleh lebih dari 50 karakter.',
+                'email.required' => 'Email wajib diisi.',
+                'email.email' => 'Email harus berupa email yang valid.',
+                'email.unique' => 'Email harus berbeda dengan email yang sudah di tambahkan.',
+            ]);
+        }else{
+
+            $validate = $request->validate([
+                'nama' => 'required|string|max:50',
+                'email' => 'required|email',
+            ],
+            [
+                'nama.required' => 'Nama wajib diisi.',
+                'nama.string' => 'Nama harus berupa teks.',
+                'nama.max' => 'Nama tidak boleh lebih dari 50 karakter.',
+                'email.required' => 'Email wajib diisi.',
+                'email.email' => 'Email harus berupa email yang valid.',
+            ]);
+        }
+
+        $user->name = $request->input('nama');
+        $user->email = $request->input('email');
+        if ($user->save()) {
+            return redirect()->back()->with('success', 'Petugas telah diubah');
+        }else {
+            return redirect()->back()->with('danger', 'Petugas gagal diubah');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+    private function check(string $check, User $user){
+        if($check == 'checkin'){
+            if(!$user->checkIn->isEmpty()){
+                $result = $user->checkIn;
+            }else{
+                $result = null;
+            }
+        }else if($check == 'checkout'){
+            if(!$user->checkOut->isEmpty()){
+                $result = $user->checkOut;
+            }else{
+                $result = null;
+            }
+        }
+        return $result;
     }
 }
