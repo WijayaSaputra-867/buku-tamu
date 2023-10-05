@@ -62,6 +62,14 @@ class UserController extends Controller
         $user->name = $request->nama;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+       
+         // menaruh image di public
+         if ($request->file('image') != null) {
+            $user->image =  $request->file('image')->store('guest', 'public');
+         }else {
+             $user->image = null;
+         }
+
         if ($user->save()) {
             return redirect()->back()->with('success', 'Petugas telah ditambahkan');
         }else {

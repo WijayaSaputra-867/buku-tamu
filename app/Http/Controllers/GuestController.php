@@ -39,6 +39,7 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->file('image')->store('guest', 'public');
         // melakukan validasi pengecekan apakah data sesuai atau tidak
         $request->validate([
             'nama' => 'required|string|max:50',
@@ -47,6 +48,7 @@ class GuestController extends Controller
             'keperluan' => 'required|string|max:255',
             'bertemu' => 'required|string|max:255',
             'telepon' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg',
         ], 
         [
             'nama.required' => 'Nama wajib diisi.',
@@ -65,12 +67,14 @@ class GuestController extends Controller
             'bertemu.max' => 'Bertemu tidak boleh lebih dari 255 karakter.',
             'telepon.required' => 'Nomor telepon wajib diisi.',
             'telepon.numeric' => 'Nomor telepon wajib menggunakan angka.',
+            'image.image' => 'Image harus berupa gambar',
+            'image.mimes' => 'Ekstensi harus jpeg, png, atau jpg'
         ]);
 
         // membuat kode unik untuk kunjungan
         $unique_code = md5($request->input('nama') . $request->input('instansi'));
         $unique_code = substr($unique_code, 0, 8);
-
+        
         // inisialisasi model Guest sebagai objek tamu
         $tamu = new Guest;
         $tamu->user_checkin = auth()->id();
@@ -82,6 +86,13 @@ class GuestController extends Controller
         $tamu->telepon = $request->input('telepon');
         $tamu->kode_kunjungan = $unique_code;
         $tamu->check_in = now();
+
+        // menaruh image di public
+        if ($request->file('image') != null) {
+           $tamu->image =  $request->file('image')->store('guest', 'public');
+        }else {
+            $tamu->image = null;
+        }
         
         // cek apakah kunjungan ada atau tidak dalam database
         if (Visit::where('kode_kunjungan', $unique_code)->first()) {

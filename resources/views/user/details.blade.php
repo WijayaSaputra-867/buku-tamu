@@ -13,7 +13,11 @@
         <h5 class="mt-3">No Telepon : {{ $user->phone }}</h5>
     </div>
     <div class="col">
-        <img src="" alt="" class="img-thumbnail rounded mx-auto d-block">
+      @if ($user->image != null)    
+        <img src="{{ asset('storage/'. $user->image) }}" alt="{{ $user->name }}" class="img-thumbnail rounded mx-auto d-block" style="max-width: 300px; max-height: 400px ;">
+      @else  
+        <img src="{{ asset('/img/person.png') }}" alt="{{ $user->name }}" class="img-thumbnail rounded mx-auto d-block" style="max-width: 300px; max-height: 400px;">
+      @endif
     </div>
   </div>
   <div class="row">

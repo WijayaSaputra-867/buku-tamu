@@ -27,6 +27,15 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Tamu</label>
+                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="formFile" name="image">
+                            @error('image')     
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label for="inputPassword" class="form-label">Password</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror" id="inputPassword" name="password">
                             @error('password')     

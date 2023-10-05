@@ -4,15 +4,19 @@
   @include('partials.alert')
   <div class="row mb-5">
     <div class="col">   
-        <h3 class="text-center">{{ $guest->nama_tamu }}</h3>
+        <h1 class="text-center mb-5">{{ $guest->nama_tamu }}</h1>
         <hr class="border-primary border-3">
         <hr class="border-primary border-2">
-        <h4 class="mt-3">Asal Instansi : {{ $guest->asal_instansi }}</h4>
-        <h5 class="mt-3">Jenis Kelamin : {{ $guest->jk }}</h5>
-        <h5 class="mt-3">No Telepon : {{ $guest->telepon }}</h5>
+        <h2 class="mt-5 mx-auto">Asal Instansi : {{ $guest->asal_instansi }}</h2>
+        <h3 class="mt-3">Jenis Kelamin : {{ $guest->jk }}</h3>
+        <h3 class="mt-3">No Telepon : {{ $guest->telepon }}</h3>
     </div>
     <div class="col">
-        <img src="{{ asset('/img/picture.jpg') }}" alt="" class="img-thumbnail rounded mx-auto d-block" style="max-width: 80%">
+      @if ($guest->image != null)    
+        <img src="{{ asset('storage/'. $guest->image) }}" alt="{{ $guest->nama_tamu }}" class="img-thumbnail rounded mx-auto d-block" style="max-width: 300px; max-height: 400px ;">
+      @else  
+        <img src="{{ asset('/img/person.png') }}" alt="{{ $guest->nama_tamu }}" class="img-thumbnail rounded mx-auto d-block" style="max-width: 300px; max-height: 400px;">
+      @endif
     </div>
   </div>
   <div class="row">

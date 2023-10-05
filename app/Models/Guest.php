@@ -11,7 +11,7 @@ class Guest extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    protected $nullable = ['user_checkout','check_out'];
+    protected $nullable = ['user_checkout', 'image','check_out'];
 
    
     public function checkIn(){
