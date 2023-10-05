@@ -12,7 +12,7 @@
         <h5 class="mt-3">No Telepon : {{ $guest->telepon }}</h5>
     </div>
     <div class="col">
-        <img src="" alt="" class="img-thumbnail rounded mx-auto d-block">
+        <img src="{{ asset('/img/picture.jpg') }}" alt="" class="img-thumbnail rounded mx-auto d-block" style="max-width: 80%">
     </div>
   </div>
   <div class="row">
@@ -30,21 +30,23 @@
               </tr>
             </thead>
             <tbody>
+              @foreach ($visits as $visit)
               <tr>
-                <td>{{ $guest->keperluan_tamu }}</td>
-                <td>{{ $guest->bertemu }}</td>
-                <td>{{ ($guest->check_out === null) ? 'Sedang Berkunjung' : 'Kunjungan Selesai'}}</td>
-                <td>{{ $guest->checkIn->name }}</td>
-                <td>{{ ($guest->check_out) === null ? '-' : $guest->checkOut->name }}</td>
-                <td>{{ $guest->check_in }}</td>
+                <td>{{ $visit->keperluan_tamu }}</td>
+                <td>{{ $visit->bertemu }}</td>
+                <td>{{ ($visit->check_out === null) ? 'Sedang Berkunjung' : 'Kunjungan Selesai'}}</td>
+                <td>{{ $visit->checkIn->name }}</td>
+                <td>{{ ($visit->check_out) === null ? '-' : $visit->checkOut->name }}</td>
+                <td>{{ $visit->check_in }}</td>
                 <td>
-                  @if ($guest->check_out === null)
-                  <a href="/guest/checkout/{{ $guest->id }}" class="btn btn-sm btn-outline-primary">Check Out</a>
+                  @if ($visit->check_out === null)
+                  <a href="/guest/checkout/{{ $visit->id }}" class="btn btn-sm btn-outline-primary">Check Out</a>
                   @else
-                  {{ $guest->check_out }}
+                  {{ $visit->check_out }}
                   @endif
                 </td>
               </tr> 
+              @endforeach
             </tbody>
         </table>
     </div>

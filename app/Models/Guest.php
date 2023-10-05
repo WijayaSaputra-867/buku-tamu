@@ -20,4 +20,8 @@ class Guest extends Model
     public function checkOut(){
         return $this->belongsTo(User::class, 'user_checkout', 'id');
     }
+
+    public function kunjungan(){
+        return $this->belongsTo(Visit::class, 'kode_kunjungan', 'kode_kunjungan');
+    }
 }

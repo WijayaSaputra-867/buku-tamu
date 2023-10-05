@@ -1,4 +1,4 @@
-<form action="/guest/create" method="post">
+<form action="/guest/create" method="post" enctype="multipart/form-data">
     @csrf
     <div class="modal fade" id="tambahTamuModal" tabindex="-1" aria-labelledby="tambahTamuModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -68,6 +68,15 @@
                             <label for="inputTelepon" class="form-label">Telepon</label>
                             <input type="tel" class="form-control @error('telepon') is-invalid @enderror" id="inputTelepon" name="telepon">
                             @error('telepon')     
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Foto Tamu</label>
+                            <input class="form-control @error('image') is-invalid @enderror" type="file" id="formFile" name="image">
+                            @error('image')     
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

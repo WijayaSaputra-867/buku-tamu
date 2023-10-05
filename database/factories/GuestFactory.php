@@ -22,6 +22,7 @@ class GuestFactory extends Factory
     public function definition(): array
     {
         $gender = $this->getRandArray(['Laki-laki', 'Perempuan']);
+        $unique_code = bcrypt(fake()->name().fake()->company());
         return [
             'user_checkin' => mt_rand(1, 10),
             'nama_tamu' => fake()->name(),
@@ -31,6 +32,7 @@ class GuestFactory extends Factory
             'asal_instansi' => fake()->company(),
             'telepon' => fake()->e164PhoneNumber(),
             'check_in' => fake()->dateTimeBetween('-5 year', 'now'),
+            'check_in' => $unique_code,
         ];
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('jk', ['Laki-laki', 'Perempuan']);
             $table->string('asal_instansi');
             $table->bigInteger('telepon');
+            $table->string('kode_kunjungan');
             $table->dateTime('check_in');
             $table->dateTime('check_out')->nullable();
             $table->timestamps();

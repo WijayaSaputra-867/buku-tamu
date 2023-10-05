@@ -27,6 +27,8 @@
         </tr>
       </thead>
       <tbody>
+        @if ($guests != null)
+            
         @foreach ($guests as $guest)    
         <tr>
           <th scope="row">{{ $loop->iteration }}</th>
@@ -45,11 +47,18 @@
           </td>
         </tr>
         @endforeach
+        @else
+        <tr>
+          <td colspan="6" class="text-center">Belum ada data tamu yang melakukan checkin dan checkout</td>
+        </tr>
+        @endif
       </tbody>
     </table>
-    <div class="mt-4">
-      {{ $guests->links() }}
-    </div>
+    @if ($guests != null)     
+      <div class="mt-4">
+        {{ $guests->links() }}
+      </div>
+    @endif
     </div>
   </div>
 @endsection

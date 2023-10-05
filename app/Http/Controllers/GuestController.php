@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Guest;
+use App\Models\Visit;
 
 class GuestController extends Controller
 {
@@ -22,7 +23,11 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = Guest::latest()->orderBy('check_in', 'desc')->paginate(10);
+        if(!Guest::all()->isEmpty()){
+            $guests = Guest::latest()->orderBy('check_in', 'desc')->paginate(10);
+        }else{
+            $guests = null;
+        }
         return view('guest.index', [
             'link' => 'guest',
             'guests' => $guests,
@@ -34,6 +39,7 @@ class GuestController extends Controller
      */
     public function store(Request $request)
     {
+        // melakukan validasi pengecekan apakah data sesuai atau tidak
         $request->validate([
             'nama' => 'required|string|max:50',
             'instansi' => 'required|string|max:255',
@@ -60,7 +66,12 @@ class GuestController extends Controller
             'telepon.required' => 'Nomor telepon wajib diisi.',
             'telepon.numeric' => 'Nomor telepon wajib menggunakan angka.',
         ]);
-        
+
+        // membuat kode unik untuk kunjungan
+        $unique_code = md5($request->input('nama') . $request->input('instansi'));
+        $unique_code = substr($unique_code, 0, 8);
+
+        // inisialisasi model Guest sebagai objek tamu
         $tamu = new Guest;
         $tamu->user_checkin = auth()->id();
         $tamu->nama_tamu = $request->input('nama');
@@ -69,8 +80,22 @@ class GuestController extends Controller
         $tamu->jk = $request->input('jk');
         $tamu->asal_instansi = $request->input('instansi');
         $tamu->telepon = $request->input('telepon');
+        $tamu->kode_kunjungan = $unique_code;
         $tamu->check_in = now();
         
+        // cek apakah kunjungan ada atau tidak dalam database
+        if (Visit::where('kode_kunjungan', $unique_code)->first()) {
+            $kunjungan = Visit::where('kode_kunjungan', $unique_code)->first();
+            $kunjungan->total_kunjungan = $kunjungan->total_kunjungan + 1;
+            $kunjungan->save();
+        }else{
+            $kunjungan = new Visit;
+            $kunjungan->kode_kunjungan = $unique_code;
+            $kunjungan->total_kunjungan = 1;
+            $kunjungan->save();
+        }
+
+        // cek apakah data tamu dan data kunjungan berhasil disimpan
         if ($tamu->save()) {
             return redirect()->back()->with('success', 'Data tamu telah ditambahkan');
         }else {
@@ -83,10 +108,11 @@ class GuestController extends Controller
      */
     public function show(Guest $guest)
     {
-        
+        $visits = Visit::where('kode_kunjungan', $guest->kode_kunjungan)->first();
         return view('guest.details',[
             'link' => 'guest',
-            'guest' => $guest
+            'guest' => $guest,
+            'visits' => $visits->kunjungan
         ]);
     }
 
