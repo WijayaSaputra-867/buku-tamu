@@ -21,7 +21,7 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [DashboardController::class, 'index']);
 
 Route::prefix('/guest')->group(function(){
-    Route::get('/', [GuestController::class, 'index']);
+    Route::get('/', [GuestController::class, 'index'])->name('guest');
     Route::post('/create', [GuestController::class, 'store']);
     Route::get('/details/{guest}', [GuestController::class, 'show']);
     Route::get('/checkout/{guest}', [GuestController::class, 'update']);

@@ -18,5 +18,6 @@
 </head>
 <body>
     @include('partials.navbar')
+    <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>
