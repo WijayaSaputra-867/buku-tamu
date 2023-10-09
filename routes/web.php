@@ -19,11 +19,11 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [DashboardController::class, 'index']);
-Route::post('/find', [DashboardController::class, 'find']);
+Route::get('/find', [DashboardController::class, 'find']);
 
 Route::prefix('/guest')->group(function(){
     Route::get('/', [GuestController::class, 'index'])->name('guest');
-    Route::post('/find', [GuestController::class, 'search']);
+    Route::get('/find', [GuestController::class, 'search']);
     Route::post('/create', [GuestController::class, 'store']);
     Route::get('/details/{guest}', [GuestController::class, 'show']);
     Route::get('/checkout/{guest}', [GuestController::class, 'update']);

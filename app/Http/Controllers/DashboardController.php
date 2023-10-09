@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $key = $request->input('cari');
         $guests = Guest::where('nama_tamu', 'like', '%' . $key . '%')->orWhere('asal_instansi',  'like', '%' . $key . '%')->latest()->orderBy('check_in', 'desc')->paginate(10);
         return view('welcome', [
-            'link' => 'guest',
+            'link' => 'welcome',
             'guests' => $guests,
         ]);
     }

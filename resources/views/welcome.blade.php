@@ -8,8 +8,7 @@
       <h1>Data Tamu</h1>
     </div>
     <div class="d-flex justify-content-end my-3 mx-3">
-      <form class="d-flex" method="post" action="/find">
-        @csrf
+      <form class="d-flex" method="get" action="/find/">
         <input class="form-control-sm me-2 border-info" type="text" placeholder="Cari tamu" aria-label="Search" name="cari">
         <button class="btn btn-outline-info btn-sm" type="submit">Cari</button>
       </form>

@@ -19,8 +19,7 @@
     </div>
     <div class="col">
       <span class="d-flex justify-content-end">
-        <form class="d-flex" method="post" action="/guest/find">
-          @csrf
+        <form class="d-flex" method="get" action="/guest/find">
           <input class="form-control-sm me-2 border-info" type="text" placeholder="Cari tamu" aria-label="Search" name="cari">
           <button class="btn btn-outline-info btn-sm" type="submit">Cari</button>
         </form>
