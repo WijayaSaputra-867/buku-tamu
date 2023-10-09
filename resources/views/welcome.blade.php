@@ -8,9 +8,11 @@
       <h1>Data Tamu</h1>
     </div>
     <div class="d-flex justify-content-end my-3 mx-3">
-        {{-- <button class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#tambahTamuModal">
-          Tambah Tamu
-        </button> --}}
+      <form class="d-flex" method="post" action="/find">
+        @csrf
+        <input class="form-control-sm me-2 border-info" type="text" placeholder="Cari tamu" aria-label="Search" name="cari">
+        <button class="btn btn-outline-info btn-sm" type="submit">Cari</button>
+      </form>
     </div>
   </div>
   <div>

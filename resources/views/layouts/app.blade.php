@@ -13,11 +13,22 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    {{-- Css --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
     @include('partials.navbar')
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-light text-center py-3">
+        <div class="container">
+            <p>&copy; 2023 Wijaya Saputra. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+    
     <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

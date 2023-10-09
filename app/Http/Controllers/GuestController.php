@@ -141,4 +141,14 @@ class GuestController extends Controller
             return redirect()->back()->with('danger', 'Check ouut gagal');
         }
     }
+
+    public function search(Request $request) 
+    {
+        $key = $request->input('cari');
+        $guests = Guest::where('nama_tamu', 'like', '%' . $key . '%')->orWhere('asal_instansi',  'like', '%' . $key . '%')->latest()->orderBy('check_in', 'desc')->paginate(10);
+        return view('guest.index', [
+            'link' => 'guest',
+            'guests' => $guests,
+        ]);
+    }
 }
