@@ -9,8 +9,14 @@
     </div>
     <div class="d-flex justify-content-end my-3 mx-3">
       <form class="d-flex" method="get" action="/find/">
+        @if ($guests == null)
+          <fieldset disabled>
+        @endif
         <input class="form-control-sm me-2 border-info" type="text" placeholder="Cari tamu" aria-label="Search" name="cari">
         <button class="btn btn-outline-info btn-sm" type="submit">Cari</button>
+        @if ($guests == null)
+          </fieldset>
+        @endif
       </form>
     </div>
   </div>
