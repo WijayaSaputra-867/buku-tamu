@@ -10,7 +10,7 @@
                 <div class="modal-body">
                         <div class="mb-3">
                             <label for="inputname" class="form-label">Nama Tamu</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="inputname" name="nama">
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="inputname" name="nama" value="{{ old('nama') }}">
                             @error('nama')     
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputInstansi" class="form-label">Asal Instansi</label>
-                            <input type="text" class="form-control @error('instansi') is-invalid @enderror" id="inputInstansi" name="instansi">
+                            <input type="text" class="form-control @error('instansi') is-invalid @enderror" id="inputInstansi" name="instansi" value="{{ old('instansi') }}">
                             @error('instansi')     
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -48,7 +48,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputKeperluan" class="form-label">Keperluan Tamu</label>
-                            <input type="text" class="form-control @error('keperluan') is-invalid @enderror" id="inputKeperluan" name="keperluan">
+                            <input type="text" class="form-control @error('keperluan') is-invalid @enderror" id="inputKeperluan" name="keperluan" value="{{ old('keperluan') }}">
                             @error('keperluan')     
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -57,7 +57,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputBertemu" class="form-label">Bertemu</label>
-                            <input type="text" class="form-control @error('bertemu') is-invalid @enderror" id="inputBertemu" name="bertemu">
+                            <input type="text" class="form-control @error('bertemu') is-invalid @enderror" id="inputBertemu" name="bertemu" value="{{ old('bertemu') }}">
                             @error('bertemu')     
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -66,7 +66,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputTelepon" class="form-label">Telepon</label>
-                            <input type="tel" class="form-control @error('telepon') is-invalid @enderror" id="inputTelepon" name="telepon">
+                            <input type="tel" class="form-control @error('telepon') is-invalid @enderror" id="inputTelepon" name="telepon" value="{{ old('telepon') }}">
                             @error('telepon')     
                                 <div class="invalid-feedback">
                                     {{ $message }}

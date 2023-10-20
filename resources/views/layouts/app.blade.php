@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     {{-- Css --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -22,12 +22,14 @@
 <body>
     @include('partials.navbar')
     <!-- Footer -->
-    <footer class="bg-secondary text-light text-center py-3 @if(request()->url() == 'http://127.0.0.1:8001/login' || request()->url() == 'http://127.0.0.1:8001/register' || request()->url() == 'http://127.0.0.1:8001' || request()->url() == 'http://127.0.0.1:8001/') fixed-bottom @endif">
+    <footer id="footer" class="bg-secondary text-light text-center py-3">
         <div class="container">
             <p>&copy; 2023 Wijaya Saputra. Hak Cipta Dilindungi.</p>
         </div>
     </footer>
     
     <script src="{{ mix('/js/app.js') }}"></script>
+    <script src="{{ asset('/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

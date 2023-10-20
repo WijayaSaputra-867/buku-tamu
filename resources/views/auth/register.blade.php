@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include('partials.alert')
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -15,9 +16,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nama Petugas') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus>
 
-                                @error('name')
+                                @error('nama')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -32,6 +33,38 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="jk" class="col-md-4 col-form-label text-md-end">{{ __('Jenis Kelamin') }}</label>
+
+                            <div class="my-2 col-md-6">
+                                <input id="l" type="radio" class="form-check-input @error('gender') is-invalid @enderror" name="gender" value="Laki-laki" required>
+                                <label for="l">Laki-laki</label>
+
+                                <input id="p" type="radio" class="form-check-input ms-3 @error('gender') is-invalid @enderror" name="gender" value="Perempuan" required>
+                                <label for="p">Perempuan</label>
+
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Telepon') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="tel" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+                                @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -58,6 +91,11 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
