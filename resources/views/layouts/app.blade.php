@@ -14,10 +14,11 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     {{-- Css --}}
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 </head>
 <body>
     @include('partials.navbar')
@@ -28,8 +29,7 @@
         </div>
     </footer>
     
-    <script src="{{ mix('/js/app.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.js') }}"></script>
+    {{-- <script src="{{ mix('/js/app.js') }}"></script> --}}
     <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

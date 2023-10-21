@@ -24,7 +24,7 @@ class GuestController extends Controller
     public function index()
     {
         if(!Guest::all()->isEmpty()){
-            $guests = Guest::latest()->orderBy('check_in', 'desc')->paginate(10);
+            $guests = Guest::with('checkIn')->with('checkOut')->latest()->orderBy('check_in', 'desc')->paginate(10);
         }else{
             $guests = null;
         }
