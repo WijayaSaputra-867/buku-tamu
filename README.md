@@ -75,15 +75,14 @@ php artisan key:generate
 2. Sesuaikan konfigurasi di `.env` seperti contoh di atas.
 3. Jalankan migrasi tabel:
 
-   ```bash
-   php artisan migrate
-   php artisan db:seed
-   ```
+    ```bash
+    php artisan migrate
+    php artisan db:seed
+    ```
 
 ---
 
 ## ⚙️ 7. Install Dependensi Frontend
-
 
 ```bash
 npm install
@@ -99,6 +98,7 @@ php artisan serve
 ```
 
 Server akan berjalan di:
+
 ```
 http://127.0.0.1:8000
 ```
@@ -113,19 +113,13 @@ Sekarang project **Buku Tamu Laravel** sudah siap digunakan 🎉
 
 ### 🧰 Catatan Tambahan
 
-- PHP versi minimal: **8.1**
-- Pastikan ekstensi berikut aktif:
-  - `OpenSSL`, `PDO`, `Mbstring`, `Tokenizer`, `XML`, `Ctype`, `JSON`
-- Gunakan database seperti **MySQL** atau **PostgreSQL**
-
----
-
-### 📄 Lisensi
-
-Project ini dilisensikan di bawah [MIT License](LICENSE).
+-   PHP versi minimal: **8.1**
+-   Pastikan ekstensi berikut aktif:
+    -   `OpenSSL`, `PDO`, `Mbstring`, `Tokenizer`, `XML`, `Ctype`, `JSON`
+-   Gunakan database seperti **MySQL** atau **PostgreSQL**
 
 ---
 
 ### 👨‍💻 Kontributor
 
-- **Wijaya Saputra** – [GitHub Profile](https://github.com/WijayaSaputra-867)
+-   **Wijaya Saputra** – [GitHub Profile](https://github.com/WijayaSaputra-867)
