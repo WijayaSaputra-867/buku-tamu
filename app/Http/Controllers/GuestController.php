@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Models\Institution;
 use App\Exports\GuestExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreGuestRequest;
-use App\Models\Institution;
 
 
 
@@ -32,13 +33,20 @@ class GuestController extends Controller
     public function store(StoreGuestRequest $request)
     {
         $data = $request->validated();
-        $data['check_in_at'] = now();
 
+        if (request()->hasFile('photo')) {
+            $path = request()->file('photo')->store('guests', 'public');
+            $data['photo'] = $path;
+        }
+
+        $data['user_id'] = Auth::user()->id;
+        $data['check_in_at'] = now();
 
         Guest::create($data);
 
-
-        return redirect()->route('guests.index')->with('success', 'Tamu berhasil check-in!');
+        return redirect()
+            ->route('guests.index')
+            ->with('success', 'Tamu berhasil check-in!');
     }
 
 
